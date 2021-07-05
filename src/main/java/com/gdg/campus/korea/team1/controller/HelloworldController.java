@@ -69,18 +69,14 @@ public class HelloworldController {
 
   @GetMapping("/api/v1/alibi/{id}")
   @ApiOperation(value = "알리바이 상세 정보", notes = "성공시 알리바이 정보를 가져옵니다.")
-  @ApiImplicitParams({
-      @ApiImplicitParam(name = "id", value = "User ID", dataType = "int", required = true),
-  })
+  @ApiImplicitParam(name = "id", value = "User ID", dataType = "int", required = true)
   public ResponseEntity<Alibi> one(@PathVariable int id) {
     return new ResponseEntity<>(alibiService.findById(id), HttpStatus.OK);
   }
 
   @GetMapping("/api/v1/alibi/search")
   @ApiOperation(value = "작성자로 알리바이 상세 정보", notes = "성공시 알리바이 정보를 가져옵니다.")
-  @ApiImplicitParams({
-      @ApiImplicitParam(name = "request user", value = "Request User", dataType = "String", required = true, paramType = "query"),
-  })
+  @ApiImplicitParam(name = "request user", value = "Request User", dataType = "String", required = true, paramType = "query")
   public ResponseEntity<Alibi> getByName(@RequestParam String requestUser) {
     return new ResponseEntity<>(alibiService.findByRequestUser(requestUser), HttpStatus.OK);
   }

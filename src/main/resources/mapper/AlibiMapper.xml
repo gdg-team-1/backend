@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.gdg.campus.korea.team1.mapper.AlibiMapper">
-  <resultMap id="alibiMap" type="Alibi">
+  <resultMap id="alibiMap" type="com.gdg.campus.korea.team1.model.Alibi">
     <id property="id" column="id"/>
     <result property="requestUser" column="request_user"/>
     <result property="title" column="title"/>
+    <result property="location" column="location"/>
+    <result property="dDay" column="d_day"/>
     <collection property="need" javaType="ArrayList" column="id" ofType="Need" select="findNeedForAlibi"/>
   </resultMap>
 
@@ -14,36 +16,36 @@
     WHERE id = #{id}
   </select>
 
-  <select id="findNeedForAlibi" resultType="Need">
+  <select id="findNeedForAlibi" resultType="com.gdg.campus.korea.team1.model.Need">
     SELECT tag
     FROM need
     WHERE alibi_id = #{id}
   </select>
 
-  <select id="findAll" resultType="alibiMap">
+  <select id="findAll" resultMap="alibiMap">
     SELECT *
     FROM alibi
   </select>
 
-  <select id="findByRequestUser" resultType="alibiMap">
+  <select id="findByRequestUser" resultMap="alibiMap">
     SELECT *
     FROM alibi
     WHERE request_user = #{RequestUser}
   </select>
 
-  <update id="update" parameterType="alibiMap">
+  <update id="update" parameterMap="alibiMap">
     UPDATE alibi
     SET request_user=#{requestUser}, title=#{title}, d_day=#{dDay}, location=#{location}
     WHERE id = #{id}
   </update>
 
-  <insert id="insertNeed" parameterType="need">
+  <insert id="insertNeed" parameterType="com.gdg.campus.korea.team1.model.Need">
     INSERT INTO need
     (alibi_id, tag)
     VALUES(#{alibiId}, #{tag});
   </insert>
 
-  <insert id="insertAlibi" parameterType="alibiMap">
+  <insert id="insertAlibi" parameterMap="alibiMap">
     INSERT INTO alibi
     (request_user, title, d_day, location)
     VALUES(#{requestUser}, #{title}, #{dDay}, #{location});
