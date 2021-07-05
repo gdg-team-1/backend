@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdg.campus.korea.team1.mapper.AlibiMapper">
+  <resultMap id="alibiMap" type="Alibi">
+    <id property="id" column="id"/>
+    <result property="requestUser" column="request_user"/>
+    <result property="title" column="title"/>
+    <collection property="need" javaType="ArrayList" column="id" ofType="Need" select="findNeedForAlibi"/>
+  </resultMap>
+
+  <select id="findById" resultMap="alibiMap">
+    SELECT *
+    FROM alibi
+    WHERE id = #{id}
+  </select>
+
+  <select id="findNeedForAlibi" resultType="Need">
+    SELECT tag
+    FROM need
+    WHERE alibi_id = #{id}
+  </select>
+
+  <select id="findAll" resultType="alibiMap">
+    SELECT *
+    FROM alibi
+  </select>
+
+  <select id="findByRequestUser" resultType="alibiMap">
+    SELECT *
+    FROM alibi
+    WHERE request_user = #{RequestUser}
+  </select>
+
+  <update id="update" parameterType="alibiMap">
+    UPDATE alibi
+    SET request_user=#{requestUser}, title=#{title}, d_day=#{dDay}, location=#{location}
+    WHERE id = #{id}
+  </update>
+
+  <insert id="insertNeed" parameterType="need">
+    INSERT INTO need
+    (alibi_id, tag)
+    VALUES(#{alibiId}, #{tag});
+  </insert>
+
+  <insert id="insertAlibi" parameterType="alibiMap">
+    INSERT INTO alibi
+    (request_user, title, d_day, location)
+    VALUES(#{requestUser}, #{title}, #{dDay}, #{location});
+  </insert>
+
+  <delete id="deleteNeed" parameterType="int">
+    DELETE FROM need
+    WHERE alibi_id = #{alibiId}
+  </delete>
+
+  <delete id="deleteAlibi" parameterType="int">
+    DELETE FROM alibi
+    WHERE id = #{id}
+  </delete>
+
+</mapper>
