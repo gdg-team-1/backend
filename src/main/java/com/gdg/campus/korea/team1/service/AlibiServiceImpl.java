@@ -40,8 +40,11 @@ public class AlibiServiceImpl {
   public void insert(Alibi alibi) {
     logger.info("insert = {}", alibi);
     alibiMapper.insertAlibi(alibi);
+    logger.info("insert need");
     for (Need tag : alibi.getNeed()) {
+      tag.setAlibiId(alibi.getId());
       alibiMapper.insertNeed(tag);
+      logger.info("insert tag = {}", tag);
     }
   }
 
@@ -58,6 +61,7 @@ public class AlibiServiceImpl {
     dbData.setNeed(newAlibi.getNeed());
     alibiMapper.deleteNeed(newAlibi.getId());
     for (Need tag : newAlibi.getNeed()) {
+      tag.setAlibiId(dbData.getId());
       alibiMapper.insertNeed(tag);
     }
     alibiMapper.update(newAlibi);
