@@ -1,6 +1,6 @@
 package com.gdg.campus.korea.team1.config;
 
-import com.zaxxer.hikari.HikariDataSource;
+
 import javax.sql.DataSource;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
@@ -19,27 +19,28 @@ import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 public class DatabaseConfigurer {
 
   @Bean
-  @ConfigurationProperties("spring.datasource.hikari")
+  @ConfigurationProperties("spring.datasource")
   public DataSource dataSource() {
-    return DataSourceBuilder.create().type(HikariDataSource.class).build();
+    return DataSourceBuilder.create().build();
   }
 
   @Bean
-  public SqlSessionFactory sqlSessionFactory(DataSource dataSource)
-      throws Exception {
+  public SqlSessionFactory sqlSessionFactory(DataSource dataSource) throws Exception {
     final SqlSessionFactoryBean sessionFactory = new SqlSessionFactoryBean();
-    sessionFactory.setDataSource(dataSource);
+    sessionFactory.setDataSource(dataSource());
     PathMatchingResourcePatternResolver resolver = new PathMatchingResourcePatternResolver();
     sessionFactory.setMapperLocations(resolver.getResources("classpath:/mapper/**/*.xml"));
     sessionFactory.setVfs(SpringBootVFS.class);
     sessionFactory.setTypeAliasesPackage("com.gdg.campus.korea.team1.model");
-
     SqlSessionFactory sqlSessionFactory = sessionFactory.getObject();
-    assert sqlSessionFactory != null;
-    org.apache.ibatis.session.Configuration configuration = sqlSessionFactory.getConfiguration();
-    configuration.setMapUnderscoreToCamelCase(true);
-
-    return sessionFactory.getObject();
+    if (sqlSessionFactory != null) {
+      org.apache.ibatis.session.Configuration configuration = sqlSessionFactory.getConfiguration();
+      if (configuration != null) {
+        configuration.setMapUnderscoreToCamelCase(true);
+        return sessionFactory.getObject();
+      }
+    }
+    return null;
   }
 
   @Bean
@@ -48,7 +49,7 @@ public class DatabaseConfigurer {
   }
 
   @Bean
-  public DataSourceTransactionManager transactionManager() {
+  public DataSourceTransactionManager transactionManager(){
     return new DataSourceTransactionManager(dataSource());
   }
 }

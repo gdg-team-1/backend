@@ -9,6 +9,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 @Service
 public class AlibiServiceImpl {
@@ -31,10 +32,9 @@ public class AlibiServiceImpl {
     logger.info("find by id = {}", id);
     return alibiMapper.findById(id);
   }
-
-  public Alibi findByRequestUser(String name) {
-    logger.info("find by request user = {}", name);
-    return alibiMapper.findByRequestUser(name);
+  public List<Alibi> findByParam(Alibi param) {
+    logger.info("find by param = {}", param);
+    return alibiMapper.findByParam(param);
   }
 
   public void insert(Alibi alibi) {

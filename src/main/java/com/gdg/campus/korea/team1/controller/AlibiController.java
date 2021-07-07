@@ -7,11 +7,13 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -38,7 +40,7 @@ public class AlibiController {
   public ResponseEntity<Alibi> test() {
     Alibi result = new Alibi();
     result.setId(1);
-    result.setTitle("test title");
+    result.setTitle("title v2");
     result.setLocation("test location");
     result.setRequestUser("test request user");
     result.setDDay("2038-01-19 03:14:07");
@@ -77,11 +79,16 @@ public class AlibiController {
   }
 
   @GetMapping("/search")
-  @ApiOperation(value = "작성자로 알리바이 상세 정보", notes = "성공시 알리바이 정보를 가져옵니다.")
-  public ResponseEntity<Alibi> getByName(
-      @ApiParam(name = "requestUser", value = "Request User", required = true)
-      @RequestParam String requestUser) {
-    return new ResponseEntity<>(alibiService.findByRequestUser(requestUser), HttpStatus.OK);
+  @ApiOperation(value = "파라미터로 알리바이 목록 호출", notes = "성공시 알리바이 정보를 가져옵니다.")
+  public ResponseEntity<List<Alibi>> getByName(
+      @ApiParam(name = "requestUser", value = "Request User")
+      @RequestParam(required = false) String requestUser,
+      @ApiParam(name = "location", value = "location")
+      @RequestParam(required = false) String location) {
+    Alibi param = new Alibi();
+    param.setRequestUser(requestUser);
+    param.setLocation(location);
+    return new ResponseEntity<>(alibiService.findByParam(param), HttpStatus.OK);
   }
 
   @PutMapping("/{id}")

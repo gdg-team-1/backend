@@ -12,7 +12,7 @@ public interface AlibiMapper {
 
   List<Alibi> findAll();
 
-  Alibi findByRequestUser(String name);
+  List<Alibi> findByParam(Alibi alibi);
 
   void update(Alibi alibi);
 

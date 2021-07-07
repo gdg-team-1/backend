@@ -17,13 +17,12 @@ logging:
     level.org.springframework.test.web.servlet.result: DEBUG
 
 spring:
+    profiles:
+        active: dev
     datasource:
-        hikari:
-            jdbc-url: jdbc:mysql://35.193.165.214:3306/api_db?characterEncoding=UTF-8&useUnicode=true&useSSL=false
-            driver-class-name: com.mysql.cj.jdbc.Driver
-            username: team1
-            password: xla1user!
-            connection-timeout: 30000
-            idle-timeout: 600000
-            max-lifetime: 1800000
-
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        # PUBLIC 35.193.165.214
+        # PRIVATE 10.25.16.3
+        jdbcUrl: jdbc:mysql://10.25.16.3:3306/api_db?useGmtMillisForDatetimes=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&useTimezone=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
+        username: team1
+        password: xla1user!

@@ -33,6 +33,19 @@
     WHERE request_user = #{RequestUser}
   </select>
 
+  <select id="findByParam" resultMap="alibiMap">
+    SELECT *
+    FROM alibi
+    <where>
+      <if test="@org.springframework.util.StringUtils@hasText(location)">
+        location = #{location}
+      </if>
+      <if test="@org.springframework.util.StringUtils@hasText(requestUser)">
+        AND request_user = #{requestUser}
+      </if>
+    </where>
+  </select>
+
   <update id="update" parameterType="alibi">
     UPDATE alibi
     SET request_user=#{requestUser}, title=#{title}, d_day=#{dDay}, location=#{location}
