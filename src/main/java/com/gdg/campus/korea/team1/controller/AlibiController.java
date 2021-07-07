@@ -1,19 +1,16 @@
 package com.gdg.campus.korea.team1.controller;
 
 import com.gdg.campus.korea.team1.model.Alibi;
-import com.gdg.campus.korea.team1.model.Need;
 import com.gdg.campus.korea.team1.service.AlibiServiceImpl;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,14 +41,12 @@ public class AlibiController {
     result.setLocation("test location");
     result.setRequestUser("test request user");
     result.setDDay("2038-01-19 03:14:07");
-    List<Need> testNeeds = new LinkedList<>();
-    Need need1 = new Need();
-    need1.setTag("친구 사진만 필요");
-    testNeeds.add(need1);
-    Need need2 = new Need();
-    need2.setTag("나와 같이 찍기");
-    testNeeds.add(need2);
-    result.setNeed(testNeeds);
+    List<String> testCategory = new LinkedList<>();
+    String need1 = "친구 사진만 필요";
+    String need2 = "나와 같이 찍기";
+    testCategory.add(need1);
+    testCategory.add(need2);
+    result.setCategory(testCategory);
     return new ResponseEntity<>(result, HttpStatus.OK);
   }
 

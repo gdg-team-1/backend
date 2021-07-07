@@ -7,7 +7,7 @@
     <result property="title" column="title"/>
     <result property="location" column="location"/>
     <result property="dDay" column="d_day"/>
-    <collection property="need" javaType="ArrayList" column="id" ofType="Need" select="findNeedForAlibi"/>
+    <collection property="category" javaType="ArrayList" column="id" ofType="string" select="findCategoryForAlibi"/>
   </resultMap>
 
   <select id="findById" resultMap="alibiMap">
@@ -16,9 +16,9 @@
     WHERE id = #{id}
   </select>
 
-  <select id="findNeedForAlibi" resultType="Need">
-    SELECT *
-    FROM need
+  <select id="findCategoryForAlibi" resultType="string">
+    SELECT category
+    FROM category
     WHERE alibi_id = #{id}
   </select>
 
@@ -52,10 +52,10 @@
     WHERE id = #{id}
   </update>
 
-  <insert id="insertNeed" parameterType="need">
-    INSERT INTO need
-    (alibi_id, tag)
-    VALUES(#{alibiId}, #{tag});
+  <insert id="insertCategory">
+    INSERT INTO category
+    (alibi_id, category)
+    VALUES(#{alibiId}, #{category});
   </insert>
 
   <insert id="insertAlibi" parameterType="alibi" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
@@ -64,8 +64,8 @@
     VALUES(#{requestUser}, #{title}, #{dDay}, #{location})
   </insert>
 
-  <delete id="deleteNeed">
-    DELETE FROM need
+  <delete id="deleteCategory">
+    DELETE FROM category
     WHERE alibi_id = #{alibiId}
   </delete>
 

@@ -3,13 +3,11 @@ package com.gdg.campus.korea.team1.service;
 import com.gdg.campus.korea.team1.exception.TestException;
 import com.gdg.campus.korea.team1.mapper.AlibiMapper;
 import com.gdg.campus.korea.team1.model.Alibi;
-import com.gdg.campus.korea.team1.model.Need;
 import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
 
 @Service
 public class AlibiServiceImpl {
@@ -40,12 +38,12 @@ public class AlibiServiceImpl {
   public void insert(Alibi alibi) {
     logger.info("insert = {}", alibi);
     alibiMapper.insertAlibi(alibi);
-    logger.info("insert need");
-    for (Need tag : alibi.getNeed()) {
-      tag.setAlibiId(alibi.getId());
-      alibiMapper.insertNeed(tag);
-      logger.info("insert tag = {}", tag);
+    logger.info("insert category");
+    for (String cate : alibi.getCategory()) {
+      alibiMapper.insertCategory(alibi.getId(), cate);
+      logger.info("{}", cate);
     }
+    logger.info("Done insert category");
   }
 
   public void update(Alibi newAlibi) {
@@ -58,18 +56,17 @@ public class AlibiServiceImpl {
     dbData.setTitle(newAlibi.getTitle());
     dbData.setLocation(newAlibi.getLocation());
     dbData.setDDay(newAlibi.getDDay());
-    dbData.setNeed(newAlibi.getNeed());
-    alibiMapper.deleteNeed(newAlibi.getId());
-    for (Need tag : newAlibi.getNeed()) {
-      tag.setAlibiId(dbData.getId());
-      alibiMapper.insertNeed(tag);
+    dbData.setCategory(newAlibi.getCategory());
+    alibiMapper.deleteCategory(newAlibi.getId());
+    for (String cate : newAlibi.getCategory()) {
+      alibiMapper.insertCategory(dbData.getId(), cate);
     }
     alibiMapper.update(newAlibi);
   }
 
   public void removeById(int id) {
     logger.info("delete by id = {}", id);
-    alibiMapper.deleteNeed(id);
+    alibiMapper.deleteCategory(id);
     alibiMapper.deleteAlibi(id);
   }
 }

@@ -1,9 +1,7 @@
 package com.gdg.campus.korea.team1.model;
 
 import io.swagger.annotations.ApiModelProperty;
-import java.util.Date;
 import java.util.List;
-import javax.validation.constraints.NotEmpty;
 import lombok.Data;
 
 @Data
@@ -18,7 +16,7 @@ public class Alibi {
   @ApiModelProperty(example = "ITZY 콘서트 대타가 필요해요")
   private String title;
 
-  private List<Need> need;
+  private List<String> category;
 
   @ApiModelProperty(example = "서울특별시 종로구 혜화동")
   private String location;
