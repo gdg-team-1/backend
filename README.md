@@ -2,7 +2,8 @@ Back-end
 ============================
 
 ## API Interface
-https://hackmd.io/tkNgxNSlTzKmNmVAhz581A
+API 연동 규격서 v1: https://github.com/gdg-team-1/backend/blob/main/API.md  
+API 최초 설계서: https://hackmd.io/tkNgxNSlTzKmNmVAhz581A  
 
 SpringBoot HelloWorld for App Engine Standard (Java 8)
 ============================
