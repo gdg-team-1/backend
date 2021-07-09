@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gdg.campus.korea.team1.mapper.UserMapper">
+
+  <select id="findById" resultType="user">
+    SELECT *
+    FROM user
+    WHERE id = #{id}
+  </select>
+
+  <select id="findAll" resultType="user">
+    SELECT *
+    FROM user
+  </select>
+
+  <select id="findByNickname" resultType="user">
+    SELECT *
+    FROM user
+    WHERE nickname = #{nickname}
+  </select>
+
+  <update id="update" parameterType="user">
+    UPDATE user
+    SET nickname=#{nickname}, profile_url=#{profileUrl}
+    WHERE id = #{id}
+  </update>
+
+  <insert id="insert">
+    INSERT INTO user
+    (id, nickname, profile_url)
+    VALUES(#{id}, #{nickname}, #{profileUrl});
+  </insert>
+
+  <delete id="delete">
+    DELETE FROM user
+    WHERE id = #{id}
+  </delete>
+
+</mapper>

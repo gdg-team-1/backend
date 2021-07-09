@@ -10,7 +10,7 @@ public class Alibi {
   @ApiModelProperty(example = "1")
   private int id;
 
-  @ApiModelProperty(example = "홍길동")
+  @ApiModelProperty(example = "trpark")
   private String requestUser;
 
   @ApiModelProperty(example = "ITZY 콘서트 대타가 필요해요")

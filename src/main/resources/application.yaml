@@ -26,3 +26,12 @@ spring:
         jdbcUrl: jdbc:mysql://10.25.16.3:3306/api_db?useGmtMillisForDatetimes=true&useJDBCCompliantTimezoneShift=true&useLegacyDatetimeCode=false&useTimezone=true&serverTimezone=UTC&useUnicode=true&characterEncoding=utf8&useSSL=false
         username: team1
         password: xla1user!
+    cloud:
+        gcp:
+            project-id: gdg-hackathon-1-team
+            credentials:
+                location: classpath:storage-creater.json
+
+gcp:
+    storage:
+        bucket: gdg-team1-alibaba-bucket
