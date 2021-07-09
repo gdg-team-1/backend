@@ -58,7 +58,9 @@ public class GcpStorageUtil {
       int bytesRead = is.read(readBuf);
       os.write(readBuf, 0, bytesRead);
     }
-    BlobInfo blobInfo = storage.create(BlobInfo.newBuilder(bucketName, fileName).build(), os.toByteArray());
+    BlobInfo blobInfo = storage
+        .create(BlobInfo.newBuilder(bucketName, fileName).setContentType("image/jpeg").build(),
+            os.toByteArray());
     return blobInfo.getMediaLink();
   }
 
