@@ -43,6 +43,9 @@
       <if test="@org.springframework.util.StringUtils@hasText(requestUser)">
         AND request_user = #{requestUser}
       </if>
+      <if test="@org.springframework.util.StringUtils@hasText(dDay)">
+        AND date(d_day) = #{dDay}
+      </if>
     </where>
   </select>
 

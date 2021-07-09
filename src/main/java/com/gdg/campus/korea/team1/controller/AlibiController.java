@@ -79,10 +79,13 @@ public class AlibiController {
       @ApiParam(name = "requestUser", value = "Request User")
       @RequestParam(required = false) String requestUser,
       @ApiParam(name = "location", value = "location")
-      @RequestParam(required = false) String location) {
+      @RequestParam(required = false) String location,
+      @ApiParam(name = "dDay", value = "D Day")
+      @RequestParam(required = false) String dDay) {
     Alibi param = new Alibi();
     param.setRequestUser(requestUser);
     param.setLocation(location);
+    param.setDDay(dDay);
     return new ResponseEntity<>(alibiService.findByParam(param), HttpStatus.OK);
   }
 
