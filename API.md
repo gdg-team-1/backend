@@ -9,7 +9,7 @@ swagger참고([링크](https://gdg-hackathon-1-team.uc.r.appspot.com/swagger-ui/
 * content-type: application/json  
 * charset: request = UTF-8, response = UTF-8  
 
-## 연동 규격
+## 연동 규격 - 알리바이
 ### URL
 `{서버}/api/v1/alibi`
 
@@ -62,4 +62,48 @@ requestBody sample
 
 ### DELETE
 * `/api/v1/alibi/{id}`: id에 해당하는 알리바이를 삭제한다.
+
+
+## 연동 규격 - 유저
+### URL
+`{서버}/api/v1/user`
+
+### GET
+RESPONSE는 Swagger 참고
+* `/api/v1/user`: 전체 목록 호출
+* `/api/v1/user/detail/{id}`: ID에 해당하는 유저 정보 호출
+* `/api/v1/user/search?nickname={nickname}`: ~~파라미터로 검색한 유저~~ 혹시 몰라서 구현. 사용하지 않을 예정.
+
+
+### POST
+* `/api/v1/user/imageFileUpload`: 파일 업로드. response로 url이 반환됨.
+* `/api/v1/user`: body의 내용인 유저 하나를 서버에 등록
+
+
+requestBody sample
+```
+{
+  "id": "string",
+  "nickname": "nickname",
+  "profileUrl": "profileUrl"
+}
+```
+
+
+### PUT
+* `/api/v1/user/detail/{id}`: 유저 정보를 body 내용으로 수정.  
+  body에 id가 있어도 상관없습니다. URL에 있는 파라미터를 기준으로 수정합니다.
+
+requestBody sample
+```
+{
+  "id": "string",
+  "nickname": "nickname",
+  "profileUrl": "profileUrl"
+}
+```
+
+
+### DELETE
+* `/api/v1/user/detail/{id}`: id에 해당하는 알리바이를 삭제한다.
 
