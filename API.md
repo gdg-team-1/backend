@@ -17,8 +17,8 @@ swagger참고([링크](https://gdg-hackathon-1-team.uc.r.appspot.com/swagger-ui/
 RESPONSE는 Swagger 참고
 * `/api/v1/alibi`: 전체 목록 호출 
 * `/api/v1/alibi/{id}`: ID에 해당하는 알리바이 하나 호출  
-* `/api/v1/alibi/search?location={location}&requestUser={requestUser}`: 요청자의 등록된 알리바이 목록 호출
-location, requestUser는 쓰고 싶은것만 파라미터 추가해서 넘겨주시면 됩니다. 둘다 없으면 filtering 항목이 없으므로 전체 목록이 반환됩니다.
+* `/api/v1/alibi/search?location={location}&requestUser={requestUser}&dDay={dDay}`: 요청자의 등록된 알리바이 목록 호출
+location, requestUser, dDay 는 쓰고 싶은것만 파라미터 추가해서 넘겨주시면 됩니다. 파라미터가 없으면 filtering 항목이 없으므로 전체 목록이 반환됩니다.
 
 
 ### POST
