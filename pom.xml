@@ -154,7 +154,7 @@
         <version>3.1.2</version>
         <configuration>
           <to>
-            <image>myimage</image>
+            <image>gcr.io/gdg-hackathon-1-team/backend</image>
           </to>
         </configuration>
       </plugin>
