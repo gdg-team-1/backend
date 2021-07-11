@@ -13,6 +13,8 @@ public class Alibi {
   @ApiModelProperty(example = "trpark")
   private String requestUser;
 
+  private String profileUrl;
+
   @ApiModelProperty(example = "ITZY 콘서트 대타가 필요해요")
   private String title;
 

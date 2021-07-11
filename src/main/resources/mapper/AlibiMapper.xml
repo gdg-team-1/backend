@@ -11,9 +11,16 @@
   </resultMap>
 
   <select id="findById" resultMap="alibiMap">
-    SELECT *
-    FROM alibi
-    WHERE id = #{id}
+    SELECT al.id           as id,
+           al.request_user as request_user,
+           al.title        as title,
+           al.location     as location,
+           al.d_day        as d_day,
+           ur.profile_url  as profile_url
+    FROM alibi al
+           INNER JOIN `user` ur
+                      ON al.request_user = ur.id
+    WHERE al.id = #{id};
   </select>
 
   <select id="findCategoryForAlibi" resultType="string">
@@ -23,28 +30,49 @@
   </select>
 
   <select id="findAll" resultMap="alibiMap">
-    SELECT *
-    FROM alibi
+    SELECT al.id           as id,
+           al.request_user as request_user,
+           al.title        as title,
+           al.location     as location,
+           al.d_day        as d_day,
+           ur.profile_url  as profile_url
+    FROM alibi al
+           INNER JOIN `user` ur
+                      ON al.request_user = ur.id
   </select>
 
   <select id="findByRequestUser" resultMap="alibiMap">
-    SELECT *
-    FROM alibi
-    WHERE request_user = #{RequestUser}
+    SELECT al.id           as id,
+           al.request_user as request_user,
+           al.title        as title,
+           al.location     as location,
+           al.d_day        as d_day,
+           ur.profile_url  as profile_url
+    FROM alibi al
+           INNER JOIN `user` ur
+                      ON al.request_user = ur.id
+    WHERE al.request_user = #{RequestUser};
   </select>
 
   <select id="findByParam" resultMap="alibiMap">
-    SELECT *
-    FROM alibi
+    SELECT al.id as id,
+    al.request_user as request_user,
+    al.title as title,
+    al.location as location,
+    al.d_day as d_day,
+    ur.profile_url as profile_url
+    FROM alibi al
+    INNER JOIN `user` ur
+    ON al.request_user = ur.id
     <where>
       <if test="@org.springframework.util.StringUtils@hasText(location)">
-        location = #{location}
+        al.location = #{location}
       </if>
       <if test="@org.springframework.util.StringUtils@hasText(requestUser)">
-        AND request_user = #{requestUser}
+        AND al.request_user = #{requestUser}
       </if>
       <if test="@org.springframework.util.StringUtils@hasText(dDay)">
-        AND date(d_day) = #{dDay}
+        AND date(al.d_day) = #{dDay}
       </if>
     </where>
   </select>

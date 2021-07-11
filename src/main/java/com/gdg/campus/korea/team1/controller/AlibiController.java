@@ -40,6 +40,7 @@ public class AlibiController {
     result.setTitle("title v2");
     result.setLocation("test location");
     result.setRequestUser("test request user");
+    result.setProfileUrl("https://storage.googleapis.com/gdg-team1-alibaba-bucket/image/cat1.jpg");
     result.setDDay("2038-01-19 03:14:07");
     List<String> testCategory = new LinkedList<>();
     String need1 = "친구 사진만 필요";
